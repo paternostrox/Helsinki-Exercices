@@ -3,10 +3,15 @@
         participant browser
         participant server
 
-        browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+        browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note - body: { note: "Hello!"} 
         activate server
-        Note left of server: The browser starts executing the JavaScript code that fetches the JSON from the server
+        Note left of server: The server inspects the POST request and adds the new note to the list of current notes
         server-->>browser: Status Code 302 - URL redirect to https://studies.cs.helsinki.fi/exampleapp/notes
+        deactivate server
+
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+        activate server
+        server-->>browser: HTML document
         deactivate server
 
         browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
@@ -19,7 +24,7 @@
         server-->>browser: the JavaScript file
         deactivate server
 
-        Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+        Note right of browser: The browser executes the JavaScript code that fetches the updated list of notes from the server
 
         browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
         activate server
