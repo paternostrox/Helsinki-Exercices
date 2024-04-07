@@ -24,7 +24,7 @@
         server-->>browser: the JavaScript file
         deactivate server
 
-        Note right of browser: The browser executes the JavaScript code that fetches the updated list of notes from the server
+        Note right of browser: The browser executes the code that fetches the updated list of notes from the server
 
         browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
         activate server
