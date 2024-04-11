@@ -3,36 +3,34 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercices: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercices: 7
-      },
-      {
-        name: 'State of a component',
-        exercices: 14
-      }
-    ]
-  }
+  const course = 'Half Stack application development'
+  const parts = [
+    {
+      name: 'Fundamentals of React',
+      exercices: 10
+    },
+    {
+      name: 'Using props to pass data',
+      exercices: 7
+    },
+    {
+      name: 'State of a component',
+      exercices: 14
+    }
+  ]
 
   return (
     <div>
-      <Header name={course.name}/>
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      <Header course={course}/>
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   )
 }
 
 const Header = (props) => {
   return (
-    <h1>{props.name}</h1>
+    <h1>{props.course}</h1>
   )
 }
 
