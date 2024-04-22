@@ -13,10 +13,10 @@ const App = () => {
   ]
 
   let arraySize = anecdotes.length;
-
+  
   const [selected, setSelected] = useState(0)
-  const [votes, setVotes] = useState(new Uint8Array(arraySize))
-
+  const [votesList, setVotesList] = useState(new Uint8Array(arraySize))
+  
   const handleNextAnecdote = () => {
     let rnd = Math.random()
     let rndIndex = Math.floor(rnd * arraySize)
@@ -25,19 +25,57 @@ const App = () => {
   }
 
   const handleVote = () => {
-    let newVotes = [...votes]
+    let newVotes = [...votesList]
     newVotes[selected] += 1
-    setVotes(newVotes)
+    setVotesList(newVotes)
   }
   
   return (
     <div>
+      <DailyAnecdote anecdotes={anecdotes} votesList={votesList} selected={selected} />
+      <button onClick={handleVote}>vote</button>
+      <button onClick={handleNextAnecdote}>next anecdote</button>
+      <BestAnecdote anecdotes={anecdotes} votesList={votesList}/>
+    </div>
+  )
+}
+
+const DailyAnecdote = ({anecdotes, votesList, selected}) => {
+  return (
+    <div id='daily-anecdote'>
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
-      <div>
-        <button onClick={handleVote}>vote</button>
-        <button onClick={handleNextAnecdote}>next anecdote</button>
-      </div>
+      <p>has {votesList[selected]} votes</p>
+    </div>
+  )
+}
+
+const BestAnecdote = ({anecdotes, votesList}) => {
+
+  const getBestAnecdote = () => {
+    let bestAnecdoteVotes = 0;
+    let bestAnecdoteIndex = 0;
+    
+    votesList.map((votes, index) => {
+      if(votes > bestAnecdoteVotes) {
+        bestAnecdoteVotes = votes
+        bestAnecdoteIndex = index
+      }
+    })
+
+    return {
+      anecdote: anecdotes[bestAnecdoteIndex], 
+      votes: bestAnecdoteVotes
+    }
+  }
+  
+  let bestAnecdote = getBestAnecdote();
+
+  return (
+    <div id='best-anecdote'>
+      <h2>Anecdote with most votes</h2>
+      <p>{bestAnecdote.anecdote}</p>
+      <p>has {bestAnecdote.votes} votes</p>
     </div>
   )
 }
