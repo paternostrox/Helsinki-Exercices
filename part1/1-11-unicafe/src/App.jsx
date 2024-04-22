@@ -19,14 +19,6 @@ const App = () => {
   )
 }
 
-const Button = ({text, onClick}) => {
-  return (
-    <button onClick={onClick}>
-      {text}
-    </button>
-  )
-}
-
 const Statistics = ({good, neutral, bad}) => {
   
   let all = good + neutral + bad;
@@ -35,14 +27,39 @@ const Statistics = ({good, neutral, bad}) => {
 
   return (
     <div id='statistics'>
-        <h2>statistics</h2>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {all}</p>
-        <p>average {average}</p>
-        <p>positive {positivePercentage}%</p>
-      </div>
+      <h2>statistics</h2>
+      {all > 0 && 
+      <table>
+        <tbody>
+          <StatisticLine text='good' value={good} />
+          <StatisticLine text='neutral' value={neutral} />
+          <StatisticLine text='bad' value={bad} />
+          <StatisticLine text='all' value={all} />
+          <StatisticLine text='average' value={average} />
+          <StatisticLine text='positive' value={positivePercentage + '%'} />
+        </tbody>
+      </table>}
+      {all == 0 &&
+        <p>No feedback given</p>
+      }
+    </div>
+  )
+}
+
+const Button = ({text, onClick}) => {
+  return (
+    <button onClick={onClick}>
+      {text}
+    </button>
+  )
+}
+
+const StatisticLine = ({text, value}) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
