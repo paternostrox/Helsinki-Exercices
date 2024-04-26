@@ -51,7 +51,7 @@ const App = () => {
         searchString={searchString}
         setSearchString={setSearchString}
       />
-      <PersonList persons={persons} />
+      <PersonList persons={filteredPersons} />
     </div>
   )
 }
