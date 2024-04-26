@@ -1,20 +1,25 @@
 import { useState } from 'react'
-import { nanoid } from 'nanoid'
+import _ from 'lodash'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { id: nanoid(), name: 'Arto Hellas' }
+    { name: 'Arto Hellas' }
   ]) 
   const [newName, setNewName] = useState('')
 
   const handleAddName = (e) => {
     e.preventDefault()
-    let newPerson = {
-      id: nanoid(),
-      name: newName 
+    let isDuplicate = persons.reduce((acc, person) => acc = acc || person.name == newName, false)
+    if(isDuplicate) {
+      window.alert(`${newName} is already added to phonebook`)
     }
-    setPersons(persons.concat(newPerson))
-    setNewName('')
+    else {
+      let newPerson = {
+        name: newName 
+      }
+      setPersons(persons.concat(newPerson))
+      setNewName('')
+    }
   }
 
   return (
@@ -30,7 +35,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person => <li key={person.id}>{person.id} | {person.name}</li>)} 
+        {persons.map(person => <li key={person.name}>{person.name}</li>)} 
       </ul>
     </div>
   )
