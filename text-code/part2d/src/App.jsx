@@ -6,29 +6,29 @@ const port = 3000
 
 const App = (props) => {
   const [notes, setNotes] = useState([])
-  const [currentNote, setCurrentNote] = useState('hey')
+  const [currentNote, setCurrentNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    console.log('effect')
     axios
       .get(`http://localhost:${port}/notes`)
       .then(response => {
-        console.log('promise fulfilled')
         setNotes(response.data)
       })
   }, [])
-  console.log('render', notes.length, 'notes')
 
   const handleAddNote = (event) => {
     event.preventDefault()
     let currentNoteObj = {
       content: currentNote,
       important: Math.random() > 0.5,
-      id: notes.length + 1
     }
-    setNotes(notes.concat(currentNoteObj))
-    setCurrentNote('')
+    
+    axios.post(`http://localhost:${port}/notes`, currentNoteObj)
+    .then(response => {
+      setNotes(notes.concat(response.data))
+      setCurrentNote('')
+    })
   }
 
   const handleNoteChange = (event) => {
