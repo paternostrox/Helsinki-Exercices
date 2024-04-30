@@ -4,6 +4,8 @@ import AddPersonForm from './components/AddPersonForm'
 import SearchPersonField from './components/SearchPersonField'
 import PersonList from './components/PersonList'
 import pbService from './services/phonebookService'
+import BadNotification from './components/BadNotification'
+import GoodNotification from './components/GoodNotification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,12 +13,18 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
+  const [badMessage, setBadMessage] = useState('')
+  const [goodMessage, setGoodMessage] = useState('')
 
-  useEffect(() => {
+  const getPersonsFromServer = () => {
     pbService.getPersons()
     .then(initialPersons => {
       setPersons(initialPersons)
     })
+  }
+
+  useEffect(() => {
+    getPersonsFromServer()
   }, [])
 
   let filteredPersons = persons.filter((person) => 
@@ -38,6 +46,12 @@ const App = () => {
         pbService.updatePerson(personId, newPerson)
         .then(updatedPerson => {
           setPersons(persons.map(person => person.id !== personId ? person : updatedPerson))
+          setBadMessage(`${updatedPerson.name}'s number updated`)
+        })
+        .catch(error => {
+          setBadMessage(`Information of ${newName} has already been removed from server`, true)
+          setTimeout(() => setBadMessage(''), 5000)
+          getPersonsFromServer()
         })
       }
     }
@@ -47,24 +61,31 @@ const App = () => {
         setPersons(persons.concat(addedPerson))
         setNewName('')
         setNewNumber('')
+        setGoodMessage(`Added ${addedPerson.name}`)
+        setTimeout(() => setGoodMessage(''), 5000)
       })
     }
   }
 
   const handleRemovePerson = (id) => {
-    let person = persons.find(person => person.id === id)
-    if(window.confirm(`Delete ${person.name}?`))
+    let personToRemove = persons.find(person => person.id === id)
+    if(window.confirm(`Delete ${personToRemove.name}?`))
     pbService.removePerson(id)
     .then(removedPerson => {
-      setPersons(persons.filter(person => 
-        person.id !== removedPerson.id
-      ))
+      setPersons(persons.filter(person => person.id !== removedPerson.id))
+    })
+    .catch(error => {
+      setBadMessage(`Information of ${personToRemove.name} has already been removed from server`)
+      setTimeout(() => setBadMessage(''), 5000)
+      getPersonsFromServer()
     })
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <GoodNotification message={goodMessage} />
+      <BadNotification message={badMessage}/>
       <AddPersonForm 
         handleAddPerson={handleAddPerson} 
         personName={newName} 
