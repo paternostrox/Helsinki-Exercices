@@ -1,15 +1,19 @@
 const CountryDetails = ({countryData}) => {
 
-  const currencies = Object.entries(countryData.currencies).map(([key, value]) => `${value.name} (${key})`)
+  const currency = countryData.currencies 
+  ? Object.entries(countryData.currencies).map(([key, value]) => `${value.name} (${key})`)[0] 
+  : null
 
   const languages = Object.values(countryData.languages).map(value => value)
+
+  const capital = countryData.capital ? countryData.capital : null
 
   return (
     <div>
       <h1>{countryData.name.common}</h1>
-      <p>capital: {countryData.capital[0]}</p>
       <p>area: {countryData.area} km²</p>
-      <p>currency: {currencies[0]}</p>
+      {capital && <p>capital: {capital}</p>}
+      {currency && <p>currency: {currency}</p>}
       <h2>Languages</h2>
       <ul>
         {languages.map(language => <li key={language}>{language}</li>)}
