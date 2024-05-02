@@ -2,7 +2,7 @@ const CountrySearchBar = ({searchString, onChange}) => {
   
   return (
     <div>
-      find countries <input value={searchString} onChange={(e) => onChange(e.target.value)}></input>
+      find countries <input value={searchString} onChange={onChange}></input>
     </div>
   )
 }

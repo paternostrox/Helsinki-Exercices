@@ -1,4 +1,5 @@
-const CountryDetails = ({countryData}) => {
+
+const CountryDetails = ({countryData, weather}) => {
 
   const currency = countryData.currencies 
   ? Object.entries(countryData.currencies).map(([key, value]) => `${value.name} (${key})`)[0] 
@@ -7,6 +8,10 @@ const CountryDetails = ({countryData}) => {
   const languages = Object.values(countryData.languages).map(value => value)
 
   const capital = countryData.capital ? countryData.capital : null
+
+  const temperature = weather?.list[0].main.temp || null
+  const weatherDescription = weather?.list[0].weather[0].description || null
+  const weatherIcon = weather?.list[0].weather[0].icon || null
 
   return (
     <div>
@@ -20,6 +25,14 @@ const CountryDetails = ({countryData}) => {
       </ul>
       <h2>Flag</h2>
       <img src={countryData.flags.png} alt={countryData.flags.alt} height={150} />
+      {weather && 
+        <>
+          <h2>Weather</h2>
+          <p>temperature: {temperature} °C</p>
+          <img src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}></img>
+          <p>{weatherDescription}</p>
+        </>
+      }
     </div>
   )
 }

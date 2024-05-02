@@ -17,10 +17,6 @@ const CountryList = ({countriesData}) => {
     )
   }
 
-  if(countriesData.length == 1) {
-    return <CountryDetails countryData={countriesData[0]} />
-  }
-
   return null
 }
 
