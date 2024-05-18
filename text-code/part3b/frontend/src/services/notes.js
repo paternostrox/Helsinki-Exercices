@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const port = 3000
-const baseUrl = `http://localhost:${port}/api/notes`
+const baseUrl = `/api/notes`
 
 const getAll = () => {
     return axios.get(baseUrl).then(response => response.data)
