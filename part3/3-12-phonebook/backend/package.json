@@ -9,13 +9,14 @@
     "dev": "nodemon index.js",
     "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item dist -Recurse ../backend",
     "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",    
+    "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "mongoose": "^8.4.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
