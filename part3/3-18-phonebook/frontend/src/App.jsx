@@ -49,9 +49,8 @@ const App = () => {
           setBadMessage(`${updatedPerson.name}'s number updated`)
         })
         .catch(error => {
-          setBadMessage(`Information of ${newName} has already been removed from server`, true)
+          setBadMessage(error.response.data.error)
           setTimeout(() => setBadMessage(''), 5000)
-          getPersonsFromServer()
         })
       }
     }
@@ -63,6 +62,10 @@ const App = () => {
         setNewNumber('')
         setGoodMessage(`Added ${addedPerson.name}`)
         setTimeout(() => setGoodMessage(''), 5000)
+      })
+      .catch(error => {
+        setBadMessage(error.response.data.error)
+        setTimeout(() => setBadMessage(''), 5000)
       })
     }
   }

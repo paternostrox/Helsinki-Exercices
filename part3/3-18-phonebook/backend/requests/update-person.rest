@@ -1,7 +1,35 @@
+### VALID
 PUT http://localhost:3000/api/persons/664e6b47273626f072ec9694
 Content-Type: application/json
 
 {
   "name": "Rumpelstilskin",
+  "number": "123-456-789"
+}
+
+### NO NAME
+PUT http://localhost:3000/api/persons/664e6b47273626f072ec9694
+Content-Type: application/json
+
+{
+  "name": "",
+  "number": "123-456-789"
+}
+
+### NO NUMBER
+PUT http://localhost:3000/api/persons/664e6b47273626f072ec9694
+Content-Type: application/json
+
+{
+  "name": "Rumpelstilskin",
+  "number": ""
+}
+
+### NAME TOO SHORT
+PUT http://localhost:3000/api/persons/664e6b47273626f072ec9694
+Content-Type: application/json
+
+{
+  "name": "Ru",
   "number": "123-456-789"
 }
