@@ -16,10 +16,10 @@ app.get('/', (request, response) => {
   response.send('<h1>Welcome to Phonebook Backend</h1>')
 })
 
-app.get('/api/info', (request, response) => {
+app.get('/info', (request, response) => {
 
   const time = new Date()
-  const persons = Person.find({})
+  Person.find({})
   .then(persons => {
     response.send(`
       <p>Phonebook has info for ${persons.length} people</p>
