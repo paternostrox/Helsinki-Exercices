@@ -55,6 +55,12 @@ app.post('/api/notes', (request, response) => {
     content: body.content,
     important: Boolean(body.important) || false,
   })
+  
+  note.save()
+  .then(savedNote => {
+    response.json(savedNote)
+  })
+})
 
 app.delete('/api/notes/:id', (request, response) => {
   const id = request.params.id
@@ -63,12 +69,6 @@ app.delete('/api/notes/:id', (request, response) => {
     response.status(204).end()
   })
   .catch(error => next(error))
-})
-
-  note.save()
-  .then(savedNote => {
-    response.json(savedNote)
-  })
 })
 
 app.put('/api/notes/:id', (request, response, next) => {
