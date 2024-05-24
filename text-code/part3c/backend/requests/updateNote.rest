@@ -1,0 +1,8 @@
+PUT http://localhost:3000/api/notes/664f9418a98abc9dda65c508
+Content-Type: application/json
+
+{ 
+  "content": "BAZONGA", 
+  "important": true,
+  "id": "664fe911bc122fa2bd59f189"
+}
