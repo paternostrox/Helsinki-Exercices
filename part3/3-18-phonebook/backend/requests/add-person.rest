@@ -1,7 +1,17 @@
+### VALID
 POST http://localhost:3000/api/persons
 Content-Type: application/json
 
 {
   "name": "Rumpelstilskin",
   "number": "123-456-789"
+}
+
+### INVALID NUMBER FORMAT
+POST http://localhost:3000/api/persons
+Content-Type: application/json
+
+{
+  "name": "Rumpelstilskin",
+  "number": "1456342-789"
 }
