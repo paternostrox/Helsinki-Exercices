@@ -1,1 +1,6 @@
-GET http://localhost:3000/api/persons/2
+
+### GET PERSON THAT EXISTS
+GET http://localhost:3000/api/persons/664e6b47273626f072ec9694
+
+### GET PERSON THAT DOES NOT EXIST
+GET http://localhost:3000/api/persons/someInvalidId
