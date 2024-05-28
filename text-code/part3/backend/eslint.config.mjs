@@ -16,10 +16,6 @@ export default [
           'error',
           2
       ],
-      'stylistic/linebreak-style': [
-          'error',
-          'unix'
-      ],
       'stylistic/quotes': [
           'error',
           'single'
