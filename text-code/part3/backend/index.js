@@ -60,7 +60,7 @@ app.post('/api/notes', (request, response, next) => {
 app.delete('/api/notes/:id', (request, response, next) => {
   const id = request.params.id
   Note.findByIdAndDelete(id)
-  .then(result => {
+  .then(() => {
     response.status(204).end()
   })
   .catch(error => next(error))
