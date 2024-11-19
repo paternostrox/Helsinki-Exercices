@@ -18,7 +18,7 @@ notesRouter.get("/:id", (request, response, next) => {
     .catch((error) => next(error))
 })
 
-notesRouter.post("/", async (request, response) => {
+notesRouter.post("/", async (request, response, next) => {
   const body = request.body
 
   const note = new Note({
@@ -26,8 +26,12 @@ notesRouter.post("/", async (request, response) => {
     important: body.important || false,
   })
 
-  const savedNote = await note.save()
-  response.status(201).json(savedNote)
+  try {
+    const savedNote = await note.save()
+    response.status(201).json(savedNote)
+  } catch (error) {
+    next(error)
+  }
 })
 
 notesRouter.delete("/:id", (request, response, next) => {
