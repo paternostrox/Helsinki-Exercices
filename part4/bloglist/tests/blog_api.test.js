@@ -25,6 +25,19 @@ describe("api", () => {
 
     assert(blogs.body.length, helper.initialBlogs.length)
   })
+
+  test("blogs ids are actually named id", async () => {
+    const blogs = await helper.getDbBlogs()
+
+    console.log(blogs)
+
+    const allBlogsHaveId = blogs.reduce(
+      (acc, blog) => acc && Object.hasOwn(blog, "id"),
+      true
+    )
+
+    assert(allBlogsHaveId)
+  })
 })
 
 after(async () => {
