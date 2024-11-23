@@ -72,6 +72,17 @@ describe("api", () => {
   test("adding blog with no url returns 400", async () => {
     await api.post("/api/blogs").send(helper.blogWithNoUrl).expect(400)
   })
+
+  test("a blog in database can be deleted", async () => {
+    const idToDelete = helper.initialBlogs[0]._id
+    await api.delete(`/api/blogs/${idToDelete}`)
+
+    const blogs = await helper.getDbBlogs()
+    const hasFirstBlog = blogs.findIndex((blog) => blog.id === idToDelete) > -1
+
+    assert(!hasFirstBlog)
+    assert.strictEqual(blogs.length, helper.initialBlogs.length - 1)
+  })
 })
 
 after(async () => {
