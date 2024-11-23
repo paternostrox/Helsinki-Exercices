@@ -40,7 +40,7 @@ describe("api", () => {
   test("a valid blog can safely be added", async () => {
     await api
       .post("/api/blogs")
-      .send(helper.blogNotInDb)
+      .send(helper.blogOk)
       .expect(201)
       .expect("Content-Type", /application\/json/)
 
@@ -55,7 +55,7 @@ describe("api", () => {
   test("likes get defaulted to zero if missing", async () => {
     await api
       .post("/api/blogs")
-      .send(helper.blogNotInDbWithNoLikes)
+      .send(helper.blogWithNoLikes)
       .expect(201)
       .expect("Content-Type", /application\/json/)
 
@@ -63,6 +63,14 @@ describe("api", () => {
 
     const newBlog = blogs.find((blog) => blog.title === "The Art of Rump")
     assert.strictEqual(newBlog.likes, 0)
+  })
+
+  test("adding blog with no title returns 400", async () => {
+    await api.post("/api/blogs").send(helper.blogWithNoTitle).expect(400)
+  })
+
+  test("adding blog with no url returns 400", async () => {
+    await api.post("/api/blogs").send(helper.blogWithNoUrl).expect(400)
   })
 })
 

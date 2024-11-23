@@ -51,17 +51,29 @@ const initialBlogs = [
   },
 ]
 
-const blogNotInDb = {
+const blogOk = {
   author: "Rumpelstilskin",
   title: "The Art of Rump",
   url: "http://rumpyboy.com/theartofrump",
   likes: -1,
 }
 
-const blogNotInDbWithNoLikes = {
+const blogWithNoLikes = {
   author: "Rumpelstilskin",
   title: "The Art of Rump",
   url: "http://rumpyboy.com/theartofrump",
+}
+
+const blogWithNoTitle = {
+  author: "Rumpelstilskin",
+  url: "http://rumpyboy.com/theartofrump",
+  likes: -1,
+}
+
+const blogWithNoUrl = {
+  author: "Rumpelstilskin",
+  title: "The Art of Rump",
+  likes: -1,
 }
 
 const nonExistingId = async () => {
@@ -84,8 +96,10 @@ const getDbBlogs = async () => {
 
 module.exports = {
   initialBlogs,
-  blogNotInDb,
-  blogNotInDbWithNoLikes,
+  blogOk,
+  blogWithNoLikes,
+  blogWithNoTitle,
+  blogWithNoUrl,
   nonExistingId,
   getDbBlogs,
 }
