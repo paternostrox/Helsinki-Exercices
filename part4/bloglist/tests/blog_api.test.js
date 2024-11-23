@@ -29,14 +29,27 @@ describe("api", () => {
   test("blogs ids are actually named id", async () => {
     const blogs = await helper.getDbBlogs()
 
-    console.log(blogs)
-
     const allBlogsHaveId = blogs.reduce(
       (acc, blog) => acc && Object.hasOwn(blog, "id"),
       true
     )
 
     assert(allBlogsHaveId)
+  })
+
+  test("a valid blog can safely be added", async () => {
+    await api
+      .post("/api/blogs")
+      .send(helper.blogNotInDb)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
+
+    const blogs = await helper.getDbBlogs()
+
+    assert.strictEqual(blogs.length, helper.initialBlogs.length + 1)
+
+    const titles = blogs.map((blog) => blog.title)
+    assert(titles.includes("The Art of Rump"))
   })
 })
 
