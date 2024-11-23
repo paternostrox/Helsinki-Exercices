@@ -51,6 +51,19 @@ describe("api", () => {
     const titles = blogs.map((blog) => blog.title)
     assert(titles.includes("The Art of Rump"))
   })
+
+  test("likes get defaulted to zero if missing", async () => {
+    await api
+      .post("/api/blogs")
+      .send(helper.blogNotInDbWithNoLikes)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
+
+    const blogs = await helper.getDbBlogs()
+
+    const newBlog = blogs.find((blog) => blog.title === "The Art of Rump")
+    assert.strictEqual(newBlog.likes, 0)
+  })
 })
 
 after(async () => {

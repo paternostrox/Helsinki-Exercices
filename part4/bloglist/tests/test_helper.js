@@ -58,6 +58,12 @@ const blogNotInDb = {
   likes: -1,
 }
 
+const blogNotInDbWithNoLikes = {
+  author: "Rumpelstilskin",
+  title: "The Art of Rump",
+  url: "http://rumpyboy.com/theartofrump",
+}
+
 const nonExistingId = async () => {
   const blog = new Blog({
     author: "Rumpelstilskin",
@@ -79,6 +85,7 @@ const getDbBlogs = async () => {
 module.exports = {
   initialBlogs,
   blogNotInDb,
+  blogNotInDbWithNoLikes,
   nonExistingId,
   getDbBlogs,
 }
