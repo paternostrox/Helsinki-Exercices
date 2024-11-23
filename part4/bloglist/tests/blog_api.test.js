@@ -73,7 +73,7 @@ describe("api", () => {
     await api.post("/api/blogs").send(helper.blogWithNoUrl).expect(400)
   })
 
-  test("a blog in database can be deleted", async () => {
+  test("a blog can be safely deleted", async () => {
     const idToDelete = helper.initialBlogs[0]._id
     await api.delete(`/api/blogs/${idToDelete}`)
 
@@ -82,6 +82,23 @@ describe("api", () => {
 
     assert(!hasFirstBlog)
     assert.strictEqual(blogs.length, helper.initialBlogs.length - 1)
+  })
+
+  test("a blog can be safely updated", async () => {
+    const blogToUpdate = helper.initialBlogs[0]
+
+    console.log(blogToUpdate)
+
+    const dataToUpdate = {
+      likes: 10000,
+    }
+
+    await api.put(`/api/blogs/${blogToUpdate._id}`).send(dataToUpdate)
+    const blogs = await helper.getDbBlogs()
+    const updatedBlog = await blogs.find((blog) => blog.id === blogToUpdate._id)
+    console.log(updatedBlog)
+    assert.strictEqual(blogToUpdate.title, updatedBlog.title)
+    assert.strictEqual(updatedBlog.likes, dataToUpdate.likes)
   })
 })
 
