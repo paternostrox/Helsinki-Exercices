@@ -87,8 +87,6 @@ describe("api", () => {
   test("a blog can be safely updated", async () => {
     const blogToUpdate = helper.initialBlogs[0]
 
-    console.log(blogToUpdate)
-
     const dataToUpdate = {
       likes: 10000,
     }
@@ -96,7 +94,6 @@ describe("api", () => {
     await api.put(`/api/blogs/${blogToUpdate._id}`).send(dataToUpdate)
     const blogs = await helper.getDbBlogs()
     const updatedBlog = await blogs.find((blog) => blog.id === blogToUpdate._id)
-    console.log(updatedBlog)
     assert.strictEqual(blogToUpdate.title, updatedBlog.title)
     assert.strictEqual(updatedBlog.likes, dataToUpdate.likes)
   })
