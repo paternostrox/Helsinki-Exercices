@@ -2,8 +2,9 @@ POST http://localhost:3000/api/notes
 content-type: application/json
 
 {
-  "content": "REST Client is good in testing backend",
-  "important": true
+  "content": "Mamma mia!",
+  "important": true,
+  "userId": "6745d50d64d026bbf4e59c00"
 }
 
 ###
