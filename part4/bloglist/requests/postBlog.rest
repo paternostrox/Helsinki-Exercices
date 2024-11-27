@@ -2,8 +2,8 @@ POST http://localhost:3000/api/blogs
 content-type: application/json
 
 {
-  "title": "Hello my friends",
-  "author": "Friendly man",
-  "url": "willyoubemyfriend.com",
+  "title": "This is a new blog",
+  "author": "Definitely a user",
+  "url": "bloggyblog.com",
   "likes": 0
 }
