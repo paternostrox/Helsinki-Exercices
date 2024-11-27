@@ -13,6 +13,10 @@ usersRouter.post("/", async (request, response) => {
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
 
+  if (username.length < 3 || password.length < 3) {
+    return response.status(400).json({ error: "invalid username or password" })
+  }
+
   const user = new User({
     username,
     name,
