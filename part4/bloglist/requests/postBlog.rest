@@ -1,9 +1,10 @@
 POST http://localhost:3000/api/blogs
-content-type: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyaWVuZGx5bWFuIiwiaWQiOiI2NzQ2NGU1MmIzZGFlZmY4OTZkOTM1N2QiLCJpYXQiOjE3MzI3MzE5Nzd9.6_pLi8YbuBjl11v5qFQERSLPylV92QLyMMXQ85P7LW4
 
 {
-  "title": "This is a new blog",
-  "author": "Definitely a user",
-  "url": "bloggyblog.com",
+  "title": "How to make friends",
+  "author": "FRIEND",
+  "url": "howmakefrend.com",
   "likes": 0
 }
