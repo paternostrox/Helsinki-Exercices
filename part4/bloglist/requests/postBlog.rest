@@ -1,10 +1,10 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyaWVuZGx5bWFuIiwiaWQiOiI2NzQ2NGU1MmIzZGFlZmY4OTZkOTM1N2QiLCJpYXQiOjE3MzI3MzE5Nzd9.6_pLi8YbuBjl11v5qFQERSLPylV92QLyMMXQ85P7LW4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyaWVuZGx5bWFuIiwiaWQiOiI2NzQ2NGU1MmIzZGFlZmY4OTZkOTM1N2QiLCJpYXQiOjE3MzI3MzQ1NzZ9.Yzw8UNm7xyqCsSRJZqruXt5bjwSG25nljJYRhOZB98U
 
 {
-  "title": "How to make friends",
-  "author": "FRIEND",
-  "url": "howmakefrend.com",
+  "title": "How to unmake friend",
+  "author": "NOT A FRIEND ANYMORE",
+  "url": "howunmakefrend.com",
   "likes": 0
 }
